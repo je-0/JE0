@@ -42,10 +42,10 @@ const emit = defineEmits(['close'])
   display: grid;
   place-items: center;
   padding: var(--pad);
-  background: rgba(11, 10, 9, 0.62);
+  background: rgba(7, 8, 12, 0.72);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.45s var(--ease);
+  transition: opacity 0.5s var(--ease);
 }
 
 .note.is-open {
@@ -54,30 +54,28 @@ const emit = defineEmits(['close'])
 }
 
 .note-panel {
-  width: min(1040px, 100%);
+  width: min(1080px, 100%);
   max-height: calc(100dvh - 2 * var(--pad));
   overflow: auto;
-  padding: clamp(1.4rem, 4vw, 3rem);
-  background: #12100e;
-  border: 1px solid var(--line);
+  padding: clamp(1.6rem, 4vw, 3.4rem);
 }
 
 .note-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2.4rem;
+  margin-bottom: 2.6rem;
 }
 
 .close {
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--fg-dim);
 }
 
 .close:hover {
-  color: var(--accent);
+  color: var(--fg);
 }
 
 .note-grid {
@@ -86,44 +84,46 @@ const emit = defineEmits(['close'])
 }
 
 .note-heading {
-  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-style: italic;
   line-height: 1.05;
-  font-weight: 500;
 }
 
 .credits {
-  margin-top: 1.8rem;
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
+  margin-top: 2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-dim);
 }
 
 .credits strong {
   display: block;
-  margin-top: 0.3rem;
+  margin-top: 0.35rem;
   color: var(--fg);
   font-weight: 500;
 }
 
 .note-body {
   display: grid;
-  gap: 1.1rem;
+  gap: 1.15rem;
   color: var(--fg-dim);
   font-size: 1.02rem;
+  line-height: 1.7;
   max-width: 38rem;
 }
 
 .sign {
-  margin-top: 0.6rem;
+  margin-top: 0.7rem;
   color: var(--fg);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
+  font-style: italic;
 }
 
 @media (min-width: 860px) {
   .note-grid {
     grid-template-columns: 0.9fr 1.1fr;
-    gap: 4rem;
+    gap: 4.5rem;
   }
 }
 </style>

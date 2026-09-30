@@ -55,14 +55,13 @@ const verses = [
 }
 
 .verses article {
-  padding: 1.2rem;
-  border: 1px solid var(--line);
-  min-height: 10rem;
+  min-height: 8rem;
 }
 
 .verses p {
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  line-height: 1.05;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-style: italic;
+  line-height: 1.02;
 }
 
 .quotes {

@@ -11,7 +11,7 @@ const stamps = [
     <div class="section-inner">
       <div class="top">
         <p class="index">01</p>
-        <p class="kicker">SLEEP ISN’T A LUXURY → CRAFT ISN’T A LUXURY</p>
+        <p class="kicker">CRAFT ISN’T A LUXURY</p>
       </div>
       <h2 class="display title" data-reveal="words">Craft isn’t a luxury</h2>
       <p class="lead serif" data-reveal="fade">
@@ -59,8 +59,8 @@ const stamps = [
 }
 
 .title {
-  font-size: clamp(2.8rem, 8vw, 6.4rem);
-  max-width: 12ch;
+  font-size: clamp(3.2rem, 9vw, 7.2rem);
+  max-width: 11ch;
   overflow: hidden;
 }
 
@@ -108,11 +108,8 @@ const stamps = [
 }
 
 .pill {
-  margin-top: 4rem;
-  padding: 1.4rem 1.5rem;
-  border: 1px solid var(--line);
-  background: rgba(20, 18, 16, 0.72);
-  max-width: 36rem;
+  margin-top: 4.5rem;
+  max-width: 34rem;
 }
 
 .pill p {

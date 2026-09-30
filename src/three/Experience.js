@@ -1,10 +1,10 @@
 import * as THREE from 'three'
 import { clamp, lerp } from '@/utils/math'
 
-const BG = 0x0b0a09
+const BG = 0x07080c
 const ACCENT = 0xe36a3a
-const PAPER = 0xede6d6
-const MOSS = 0x7d9b82
+const PAPER = 0xf3eee4
+const MOON = 0xd8cbb6
 
 export class Experience {
   constructor(canvas) {
@@ -18,11 +18,11 @@ export class Experience {
     this.disposed = false
 
     this.scene = new THREE.Scene()
-    this.scene.fog = new THREE.FogExp2(BG, 0.038)
+    this.scene.fog = new THREE.FogExp2(BG, 0.028)
     this.scene.background = new THREE.Color(BG)
 
-    this.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80)
-    this.camera.position.set(0, 0.15, 8.2)
+    this.camera = new THREE.PerspectiveCamera(38, 1, 0.1, 80)
+    this.camera.position.set(0, 0.05, 8.8)
 
     this.renderer = new THREE.WebGLRenderer({
       canvas,
@@ -40,6 +40,7 @@ export class Experience {
     this.scene.add(this.root)
 
     this._createLights()
+    this._createMoon()
     this._createSculpture()
     this._createOrbiters()
     this._createRings()
@@ -59,34 +60,48 @@ export class Experience {
   }
 
   _createLights() {
-    this.ambient = new THREE.AmbientLight(0x3a332c, 0.55)
+    this.ambient = new THREE.AmbientLight(0x2a2d38, 0.7)
     this.scene.add(this.ambient)
 
-    this.key = new THREE.DirectionalLight(0xffd8c0, 1.4)
-    this.key.position.set(3.2, 4.4, 5)
+    this.key = new THREE.DirectionalLight(0xf3e6d4, 1.15)
+    this.key.position.set(2.4, 5.2, 4.2)
     this.scene.add(this.key)
 
-    this.accent = new THREE.PointLight(ACCENT, 18, 16, 2)
-    this.accent.position.set(-2.4, 0.6, 2.2)
+    this.accent = new THREE.PointLight(ACCENT, 12, 18, 2)
+    this.accent.position.set(-2.8, 0.4, 2.4)
     this.scene.add(this.accent)
 
-    this.fill = new THREE.PointLight(MOSS, 6, 14, 2)
-    this.fill.position.set(2.8, -1.2, -1.4)
+    this.fill = new THREE.PointLight(0x8aa0c8, 5, 16, 2)
+    this.fill.position.set(3.2, -1.4, -2)
     this.scene.add(this.fill)
   }
 
-  _createSculpture() {
-    const geo = new THREE.IcosahedronGeometry(1.35, 1)
+  _createMoon() {
+    const geo = new THREE.SphereGeometry(3.6, 48, 48)
     const mat = new THREE.MeshStandardMaterial({
-      color: 0x1a1714,
-      metalness: 0.72,
-      roughness: 0.28,
-      envMapIntensity: 0.8,
+      color: MOON,
+      emissive: 0x1c1812,
+      roughness: 1,
+      metalness: 0,
+    })
+    this.moon = new THREE.Mesh(geo, mat)
+    this.moon.position.set(-7.4, 3.6, -14)
+    this.scene.add(this.moon)
+  }
+
+  _createSculpture() {
+    const geo = new THREE.CapsuleGeometry(0.72, 1.55, 8, 20)
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0x14161c,
+      metalness: 0.58,
+      roughness: 0.38,
+      envMapIntensity: 0.7,
     })
     this.core = new THREE.Mesh(geo, mat)
+    this.core.rotation.z = Math.PI / 2.4
     this.root.add(this.core)
 
-    const wireGeo = new THREE.IcosahedronGeometry(1.55, 1)
+    const wireGeo = new THREE.IcosahedronGeometry(1.7, 1)
     const wireMat = new THREE.MeshBasicMaterial({
       color: PAPER,
       wireframe: true,
@@ -242,12 +257,17 @@ export class Experience {
     const p = this.progress
     this.particleUniforms.uTime.value = elapsed
 
-    this.root.rotation.y = elapsed * 0.08 + p * 1.8
-    this.root.rotation.x = Math.sin(elapsed * 0.12) * 0.12 + p * 0.35
-    this.wire.rotation.y = -elapsed * 0.16
-    this.ember.rotation.x = elapsed * 0.5
-    this.ember.rotation.z = elapsed * 0.28
-    this.core.scale.setScalar(1 + Math.sin(elapsed * 0.8) * 0.03 + p * 0.18)
+    this.root.rotation.y = elapsed * 0.045 + p * 1.15
+    this.root.rotation.x = Math.sin(elapsed * 0.1) * 0.08 + p * 0.22
+    this.wire.rotation.y = -elapsed * 0.1
+    this.ember.rotation.x = elapsed * 0.32
+    this.ember.rotation.z = elapsed * 0.18
+    this.core.rotation.y = elapsed * 0.06
+    this.core.scale.setScalar(1 + Math.sin(elapsed * 0.55) * 0.02 + p * 0.12)
+    if (this.moon) {
+      this.moon.rotation.y = elapsed * 0.02
+      this.moon.position.y = 3.6 + Math.sin(elapsed * 0.18) * 0.12
+    }
 
     this.orbiters.children.forEach((mesh) => {
       const { radius, speed } = mesh.userData
@@ -264,16 +284,16 @@ export class Experience {
       ring.material.opacity = 0.08 + p * 0.22
     })
 
-    const camZ = 8.2 - p * 2.4
-    const camY = 0.15 + Math.sin(p * Math.PI) * 0.55
-    this.camera.position.x = lerp(this.camera.position.x, this.pointer.x * 0.55, 0.05)
-    this.camera.position.y = lerp(this.camera.position.y, camY - this.pointer.y * 0.28, 0.05)
-    this.camera.position.z = lerp(this.camera.position.z, camZ, 0.05)
-    this.camera.lookAt(0, 0, 0)
+    const camZ = 8.8 - p * 2.1
+    const camY = 0.05 + Math.sin(p * Math.PI) * 0.42
+    this.camera.position.x = lerp(this.camera.position.x, this.pointer.x * 0.38, 0.045)
+    this.camera.position.y = lerp(this.camera.position.y, camY - this.pointer.y * 0.2, 0.045)
+    this.camera.position.z = lerp(this.camera.position.z, camZ, 0.045)
+    this.camera.lookAt(0, 0.1, 0)
 
-    this.accent.intensity = 14 + Math.sin(elapsed * 1.4) * 3 + p * 8
-    this.accent.position.x = -2.4 + Math.sin(elapsed * 0.4) * 0.6
-    this.scene.fog.density = 0.034 + p * 0.012
+    this.accent.intensity = 10 + Math.sin(elapsed * 0.9) * 2 + p * 6
+    this.accent.position.x = -2.8 + Math.sin(elapsed * 0.28) * 0.45
+    this.scene.fog.density = 0.024 + p * 0.01
 
     this.renderer.render(this.scene, this.camera)
   }

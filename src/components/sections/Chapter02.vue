@@ -32,7 +32,7 @@
 
 .title {
   margin: 0.8rem 0 3rem;
-  font-size: clamp(2.8rem, 8vw, 6.2rem);
+  font-size: clamp(3.2rem, 9vw, 7rem);
   max-width: 10ch;
   overflow: hidden;
 }

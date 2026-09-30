@@ -56,7 +56,7 @@ const enter = async () => {
   gsap.fromTo(
     '.experience',
     { opacity: 0 },
-    { opacity: 1, duration: 1.05, ease: 'power3.out' },
+    { opacity: 1, duration: 1.4, ease: 'power2.out' },
   )
 }
 

@@ -28,8 +28,12 @@ onUnmounted(() => {
     <button type="button" class="play" @click="toggle">
       {{ playing ? 'Pause insight' : 'Play insight' }}
     </button>
-    <div>
-      <p class="kicker">{{ display.id }} · THE NOTE</p>
+    <div class="meta">
+      <p class="time">
+        <span>{{ playing ? '00:08' : '00:00' }}</span>
+        <span class="slash">/</span>
+        <span>00:24</span>
+      </p>
       <p class="serif line">{{ display.title }}</p>
     </div>
   </aside>
@@ -42,30 +46,39 @@ onUnmounted(() => {
   bottom: var(--pad);
   z-index: 30;
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  max-width: min(28rem, calc(100vw - 2 * var(--pad)));
+  align-items: flex-end;
+  gap: 1.1rem;
+  max-width: min(26rem, calc(100vw - 2 * var(--pad)));
 }
 
 .play {
-  flex: 0 0 auto;
-  padding: 0.7rem 0.95rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
   font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--fg);
 }
 
 .play:hover {
-  border-color: var(--accent);
   color: var(--accent);
 }
 
+.time {
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  color: var(--fg-dim);
+}
+
+.slash {
+  margin: 0 0.35rem;
+  color: var(--fg-faint);
+}
+
 .line {
-  margin-top: 0.2rem;
-  font-size: 0.98rem;
-  line-height: 1.3;
+  margin-top: 0.25rem;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--fg);
 }
 
 @media (max-width: 720px) {

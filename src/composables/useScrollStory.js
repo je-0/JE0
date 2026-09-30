@@ -29,6 +29,21 @@ export function bindScrollStory({ onChapter, onProgress }) {
   })
 
   if (!reduced) {
+    const hero = document.querySelector('.hero .titles')
+    if (hero) {
+      const heroTween = gsap.to(hero, {
+        y: -70,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.9,
+        },
+      })
+      if (heroTween.scrollTrigger) triggers.push(heroTween.scrollTrigger)
+    }
+
     document.querySelectorAll('[data-reveal]').forEach((el) => {
       const type = el.dataset.reveal
       if (type === 'words') splitWords(el)
@@ -44,9 +59,9 @@ export function bindScrollStory({ onChapter, onProgress }) {
         yPercent: 0,
         opacity: 1,
         rotate: 0,
-        duration: type === 'words' ? 1.05 : 1.2,
-        ease: 'power3.out',
-        stagger: type === 'words' ? 0.035 : 0,
+        duration: type === 'words' ? 1.25 : 1.35,
+        ease: 'power4.out',
+        stagger: type === 'words' ? 0.05 : 0,
         scrollTrigger: {
           trigger: el,
           start: 'top 82%',

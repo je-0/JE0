@@ -29,7 +29,7 @@ import { site, socials } from '@/data/content'
   z-index: 2;
   padding: calc(var(--pad) * 2) var(--pad) var(--pad);
   border-top: 1px solid var(--line);
-  background: linear-gradient(180deg, transparent, rgba(11, 10, 9, 0.92) 30%);
+  background: linear-gradient(180deg, transparent, rgba(7, 8, 12, 0.92) 30%);
 }
 
 .note {

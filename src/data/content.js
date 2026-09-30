@@ -1,6 +1,6 @@
 export const site = {
   brand: 'CRAFT WELL',
-  person: 'Jun Lee',
+  person: 'JEyoung',
   role: 'Creative Developer',
   location: 'Seoul',
   year: '2026',
@@ -14,7 +14,7 @@ export const note = {
   label: 'THE NOTE',
   heading: 'From a Creative to another Creative',
   credits: [
-    { label: 'DESIGN, DEVELOPMENT, 3D', value: 'JUN LEE' },
+    { label: 'DESIGN, DEVELOPMENT, 3D', value: 'JEYOUNG' },
   ],
   body: [
     '이 사이트는 제품이 아닙니다. 개인 실험입니다.',
@@ -23,7 +23,7 @@ export const note = {
     '한 가지만 남긴다면 이것입니다. 지속 가능한 창작은 쉬는 법을 아는 손에서 나옵니다. 타임라인에 보이지 않는 그 시간이야말로, 진짜 크래프트가 일어나는 자리입니다.',
     '계속 만들고, 계속 들여다봅시다.',
   ],
-  sign: '— Jun Lee',
+  sign: '— JEyoung',
 }
 
 export const insightTracks = [

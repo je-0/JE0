@@ -41,7 +41,7 @@ import { clockWords } from '@/data/content'
 
 .title {
   margin: 0.8rem 0 2rem;
-  font-size: clamp(2.8rem, 8vw, 6.4rem);
+  font-size: clamp(3.2rem, 9vw, 7.2rem);
   overflow: hidden;
 }
 

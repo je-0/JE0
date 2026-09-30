@@ -4,8 +4,8 @@ import { site } from '@/data/content'
 
 <template>
   <section class="section hero" data-chapter="0" id="chapter-0">
-    <div class="section-inner">
-      <p class="kicker" data-reveal="fade">{{ site.guide }}</p>
+    <div class="hero-inner">
+      <p class="guide" data-reveal="fade">{{ site.guide }}</p>
       <h1 class="display titles">
         <span v-for="word in site.titles" :key="word" data-reveal="words">{{ word }}</span>
       </h1>
@@ -20,15 +20,28 @@ import { site } from '@/data/content'
 <style scoped>
 .hero {
   display: grid;
-  align-content: end;
+  align-content: space-between;
   min-height: 100dvh;
-  padding-bottom: clamp(5rem, 12vw, 8rem);
+  padding: calc(var(--pad) + 3.2rem) var(--pad) var(--pad);
+}
+
+.hero-inner {
+  display: grid;
+  align-content: space-between;
+  min-height: calc(100dvh - var(--pad) * 2 - 3.2rem);
+}
+
+.guide {
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
 }
 
 .titles {
   display: grid;
-  margin: 1.2rem 0 8vh;
-  font-size: clamp(4.2rem, 16vw, 13.5rem);
+  margin: 8vh 0 auto;
+  font-size: clamp(3.6rem, 14.8vw, 12.4rem);
 }
 
 .titles span {
@@ -41,17 +54,19 @@ import { site } from '@/data/content'
   gap: 1.5rem;
   align-items: end;
   flex-wrap: wrap;
+  padding-bottom: 0.4rem;
 }
 
 .quote {
-  max-width: 18rem;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  max-width: 16rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-style: italic;
   line-height: 1.2;
 }
 
 .scroll {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--fg-dim);
 }

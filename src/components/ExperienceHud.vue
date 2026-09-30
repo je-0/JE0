@@ -23,7 +23,7 @@ const display = (value) => String(value).padStart(2, '0')
   </header>
 
   <nav class="insights" aria-label="Chapters">
-    <p class="kicker">{{ site.find }}</p>
+    <p class="label">{{ site.find }}</p>
     <ol>
       <li v-for="item in chapters" :key="item.id">
         <button
@@ -59,24 +59,26 @@ const display = (value) => String(value).padStart(2, '0')
 
 .brand,
 .note-btn {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--fg-dim);
 }
 
 .brand:hover,
 .note-btn:hover {
-  color: var(--accent);
+  color: var(--fg);
 }
 
 .counter {
   font-family: var(--font-display);
-  font-size: 0.92rem;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--fg);
 }
 
 .slash {
-  margin: 0 0.4rem;
+  margin: 0 0.45rem;
   color: var(--fg-faint);
 }
 
@@ -87,34 +89,34 @@ const display = (value) => String(value).padStart(2, '0')
   z-index: 30;
   transform: translateY(-50%);
   display: grid;
-  gap: 1rem;
+  gap: 1.15rem;
   justify-items: end;
 }
 
-.insights .kicker {
+.label {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  color: var(--fg-dim);
-  max-height: 14rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
 }
 
 ol {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.2rem;
 }
 
 button {
-  width: 1.7rem;
-  height: 1.7rem;
-  border: 1px solid transparent;
-  color: var(--fg-dim);
-  font-size: 0.74rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--fg-faint);
+  font-size: 0.72rem;
 }
 
 button.is-active,
 button:hover {
   color: var(--fg);
-  border-color: var(--accent);
 }
 
 @media (max-width: 720px) {

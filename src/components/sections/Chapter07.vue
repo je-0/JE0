@@ -29,7 +29,7 @@ import { tips } from '@/data/content'
 <style scoped>
 .title {
   margin: 0.8rem 0 1.2rem;
-  font-size: clamp(2.6rem, 7vw, 5.6rem);
+  font-size: clamp(3rem, 8vw, 6.2rem);
   max-width: 16ch;
   overflow: hidden;
 }

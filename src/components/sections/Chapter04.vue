@@ -43,7 +43,7 @@ import { works } from '@/data/content'
 
 .title {
   margin: 0.7rem 0 1.2rem;
-  font-size: clamp(2.8rem, 8vw, 6.2rem);
+  font-size: clamp(3.2rem, 9vw, 7rem);
   overflow: hidden;
 }
 
@@ -60,19 +60,12 @@ import { works } from '@/data/content'
 
 .works {
   display: grid;
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
+  gap: 2rem 3rem;
 }
 
 .works article {
-  padding: 1.4rem 1.2rem;
-  background: rgba(11, 10, 9, 0.72);
-  transition: background 0.35s var(--ease);
-}
-
-.works article:hover {
-  background: #161310;
+  padding: 0 0 1.4rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .meta {

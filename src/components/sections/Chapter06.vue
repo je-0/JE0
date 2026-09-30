@@ -26,20 +26,18 @@ import { layers } from '@/data/content'
 
 .title {
   margin: 0.8rem 0 2.4rem;
-  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-size: clamp(3.2rem, 9vw, 7rem);
   overflow: hidden;
 }
 
 ol {
   display: grid;
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
+  gap: 2rem 3rem;
 }
 
 li {
-  padding: 1.6rem 1.3rem;
-  background: rgba(11, 10, 9, 0.7);
+  padding: 0 0 1.6rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .sub {
