@@ -1,0 +1,127 @@
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.app {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 8%, rgba(11, 10, 9, 0.42) 100%),
+    linear-gradient(180deg, rgba(11, 10, 9, 0.38), transparent 24%, transparent 68%, rgba(11, 10, 9, 0.5));
+}
+
+.app.is-note {
+  cursor: auto;
+}
+
+.experience {
+  position: relative;
+  z-index: 2;
+}
+
+.experience.is-locked {
+  pointer-events: none;
+  height: 100dvh;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.section {
+  position: relative;
+  min-height: 100dvh;
+  padding: calc(var(--pad) * 1.6) var(--pad);
+}
+
+.section-inner {
+  width: min(var(--wide), 100%);
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  text-shadow: 0 10px 40px rgba(11, 10, 9, 0.45);
+}
+
+.serif {
+  font-family: var(--font-serif);
+}
+
+.muted {
+  color: var(--fg-dim);
+}
+
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+
+.grain,
+.app::after {
+  content: '';
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (pointer: fine) {
+  body,
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}

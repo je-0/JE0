@@ -1,0 +1,31 @@
+:root {
+  --bg: #0b0a09;
+  --bg-elev: #141210;
+  --bg-soft: #1c1916;
+  --fg: #ede6d6;
+  --fg-dim: #a39a8c;
+  --fg-faint: #6d675e;
+  --accent: #e36a3a;
+  --accent-soft: #f0a07a;
+  --moss: #7d9b82;
+  --line: rgba(237, 230, 214, 0.14);
+  --line-strong: rgba(237, 230, 214, 0.28);
+  --shadow: rgba(0, 0, 0, 0.45);
+
+  --font-display: 'Syne', sans-serif;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-body: 'Outfit', sans-serif;
+
+  --pad: clamp(1.1rem, 4vw, 3.2rem);
+  --wide: 1180px;
+  --copy: 40rem;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hud: 70;
+  --scene: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ease: linear;
+  }
+}

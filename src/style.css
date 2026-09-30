@@ -1,0 +1,15 @@
+@import 'lenis/dist/lenis.css';
+@import './styles/tokens.css';
+@import './styles/reset.css';
+@import './styles/base.css';
+
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.word-inner {
+  display: inline-block;
+  will-change: transform;
+}
