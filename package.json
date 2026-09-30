@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:pages": "VITE_PAGES=1 vite build && rm -rf assets && mkdir -p assets && cp -R dist/assets/. assets/",
     "preview": "vite preview"
   },
   "dependencies": {

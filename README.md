@@ -36,17 +36,6 @@ npm run build
 npm run preview
 ```
 
-## GitHub Pages
-
-이 프로젝트는 Vite 앱이라 **소스 `index.html`을 그대로 올리면 화면이 비어 보입니다.**  
-`main` 푸시 시 GitHub Actions가 `dist`를 빌드해서 [https://je-0.github.io/JE0/](https://je-0.github.io/JE0/) 에 배포합니다.
-
-저장소에서 한 번만 바꿔 주세요.
-
-1. **Settings → Pages**
-2. **Source**를 **GitHub Actions** 로 변경
-3. Actions 탭에서 `Deploy GitHub Pages` 워크플로가 끝날 때까지 대기
-
 ## 커스터마이즈
 
 | 바꾸고 싶은 것 | 위치 |
