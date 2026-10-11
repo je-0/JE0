@@ -1,6 +1,7 @@
 import * as THREE from 'three'
+import { publicUrl } from '@/utils/publicUrl.js'
 
-const TEXTURE_URL = '/hero-model.png'
+const TEXTURE_URL = publicUrl('hero-model.png')
 
 /** Full-figure KV (hero-model.png) — use entire texture */
 function fitPortraitCrop(_width, _height) {

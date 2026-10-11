@@ -1,10 +1,11 @@
 import opentype from 'opentype.js'
 import { buildCharacterSketchStrokes } from '@/three/characterSketch.js'
 import { samplePathD } from '@/three/pathSamples.js'
+import { publicUrl } from '@/utils/publicUrl.js'
 
 const FONT_URLS = {
-  poster: '/fonts/Anton-Regular.ttf',
-  serifItalic: '/fonts/InstrumentSerif-Italic.ttf',
+  poster: publicUrl('fonts/Anton-Regular.ttf'),
+  serifItalic: publicUrl('fonts/InstrumentSerif-Italic.ttf'),
 }
 
 const fontCache = new Map()

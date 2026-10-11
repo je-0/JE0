@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { Portrait } from '@/three/Portrait.js'
+import { publicUrl } from '@/utils/publicUrl.js'
+
+const heroModelUrl = publicUrl('hero-model.png')
 
 const props = defineProps({
   introReady: { type: Boolean, default: false },
@@ -97,7 +100,7 @@ onUnmounted(() => {
     <img
       v-if="useFallback"
       class="render fallback"
-      src="/hero-model.png"
+      :src="heroModelUrl"
       width="432"
       height="578"
       alt="Developer character"

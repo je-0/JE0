@@ -1,4 +1,6 @@
-const TEXTURE_URL = '/hero-model.png'
+import { publicUrl } from '@/utils/publicUrl.js'
+
+const TEXTURE_URL = publicUrl('hero-model.png')
 
 /** Matches Portrait.js — full hero-model.png */
 function portraitSourceRect(imgW, imgH) {
