@@ -1,0 +1,47 @@
+.app {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--fg);
+  overflow-x: hidden;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: 0;
+  container-type: inline-size;
+  container-name: site;
+  position: relative;
+}
+
+main > section {
+  padding-inline: var(--shell-pad-left) var(--shell-pad-right);
+  box-sizing: border-box;
+}
+
+main > section#hero {
+  padding-inline: 0;
+}
+
+#hero .needs-frame {
+  padding-inline: var(--shell-pad-left) var(--shell-pad-right);
+  box-sizing: border-box;
+}
+
+footer.footer {
+  padding-inline: var(--shell-pad-left) var(--shell-pad-right);
+  box-sizing: border-box;
+}
+
+.top-bar .shell {
+  padding-inline: var(--shell-pad-left) var(--shell-pad-right);
+  box-sizing: border-box;
+}
+
+.bleed {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: calc(50% - 50vw);
+}

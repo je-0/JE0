@@ -1,0 +1,9 @@
+@use 'functions' as *;
+
+:root {
+  --font-size-base: #{rem(16)};
+  --font-size-min: #{rem(14)};
+  --font-size-sm: #{rem(14)};
+  --font-size-ui: #{rem(14)};
+  --font-size-lg: #{rem(18)};
+}

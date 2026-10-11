@@ -1,0 +1,77 @@
+@use 'functions' as *;
+@use 'breakpoints' as bp;
+
+:root {
+  --bg: #f6f6f4;
+  --bg-elev: #ffffff;
+  --bg-soft: #ecece8;
+  --fg: #141414;
+  --fg-dim: #5c5c58;
+  --fg-faint: #8a8a84;
+  --accent: #2f4bff;
+  --accent-soft: #6d84ff;
+  --moss: #1f8a4c;
+  --blue: #2f4bff;
+  --gold: #f5d547;
+  --ink: #121212;
+  --paper: #ffffff;
+  --cream: #f3efe6;
+  --night: #141414;
+  --line: rgba(18, 18, 18, 0.12);
+  --line-strong: rgba(18, 18, 18, 0.28);
+  --shadow: rgba(20, 20, 20, 0.16);
+
+  --font-poster: 'Anton', 'Inter Tight', sans-serif;
+  --font-display: 'Inter Tight', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-body: 'Inter Tight', sans-serif;
+
+  --pad: clamp(#{rem(18)}, 4vw, #{rem(44)});
+  --gutter: var(--pad);
+  --content-inline: #{rem(22)};
+  --shell-pad-left: max(
+    calc(var(--gutter) + var(--content-inline)),
+    env(safe-area-inset-left, 0px)
+  );
+  --shell-pad-right: max(
+    calc(var(--gutter) + var(--content-inline)),
+    env(safe-area-inset-right, 0px)
+  );
+  --layout-max: 1920px;
+  --wide: 1920px;
+  --copy: #{rem(640)};
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e0e10;
+  --bg-elev: #1a1a1e;
+  --bg-soft: #222228;
+  --fg: #f4f4f2;
+  --fg-dim: #b8b8b2;
+  --fg-faint: #8a8a84;
+  --paper: #121214;
+  --ink: #f4f4f2;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.22);
+  --shadow: rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: bp.$screen-mobile-max) {
+  :root {
+    --content-inline: #{rem(8)};
+    --pad: #{rem(14)};
+  }
+}
+
+@media (min-width: bp.$screen-tablet-min) and (max-width: bp.$screen-tablet-max) {
+  :root {
+    --content-inline: #{rem(16)};
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ease: linear;
+  }
+}

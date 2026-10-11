@@ -1,135 +1,118 @@
 <script setup>
 import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import { gsap } from 'gsap'
-import CursorDot from '@/components/CursorDot.vue'
-import SceneCanvas from '@/components/SceneCanvas.vue'
-import Loader from '@/components/Loader.vue'
-import TheNote from '@/components/TheNote.vue'
-import ExperienceHud from '@/components/ExperienceHud.vue'
-import InsightPlayer from '@/components/InsightPlayer.vue'
-import HeroSection from '@/components/sections/HeroSection.vue'
-import Chapter01 from '@/components/sections/Chapter01.vue'
-import Chapter02 from '@/components/sections/Chapter02.vue'
-import Chapter03 from '@/components/sections/Chapter03.vue'
-import Chapter04 from '@/components/sections/Chapter04.vue'
-import Chapter05 from '@/components/sections/Chapter05.vue'
-import Chapter06 from '@/components/sections/Chapter06.vue'
-import Chapter07 from '@/components/sections/Chapter07.vue'
-import FooterSection from '@/components/sections/FooterSection.vue'
-import { useExperience } from '@/composables/useExperience'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SiteHeader from '@/components/SiteHeader.vue'
+import HeroShowcase from '@/components/HeroShowcase.vue'
+import WorksBlock from '@/components/WorksBlock.vue'
+import ContactBand from '@/components/ContactBand.vue'
+import SiteFooter from '@/components/SiteFooter.vue'
+import { useI18n } from '@/i18n'
 import { createLenis } from '@/composables/useLenis'
-import { bindScrollStory } from '@/composables/useScrollStory'
-import { easeOutCubic } from '@/utils/math'
 
-const { setExperience, experience } = useExperience()
-const entered = ref(false)
-const noteOpen = ref(false)
-const sceneReady = ref(false)
-const loadProgress = ref(0)
-const chapter = ref(0)
-
+const { t } = useI18n()
+const menuOpen = ref(false)
 let lenisApi = null
-let unbindStory = null
-let loadFrame = 0
 
-const onSceneReady = (instance) => {
-  setExperience(instance)
-  sceneReady.value = true
-}
-
-const enter = async () => {
-  if (!sceneReady.value || loadProgress.value < 100 || entered.value) return
-  entered.value = true
-  document.body.classList.remove('is-locked')
+const jump = async (id) => {
+  menuOpen.value = false
   await nextTick()
 
-  lenisApi = createLenis()
-  unbindStory = bindScrollStory({
-    onChapter: (id) => {
-      chapter.value = id
-    },
-    onProgress: (progress) => {
-      experience.value?.setProgress(progress)
-    },
+  const target = document.getElementById(id)
+  if (!target) return
+
+  const header = document.querySelector('.top-bar')
+  const offset = -((header?.offsetHeight ?? 0) + 4)
+
+  requestAnimationFrame(() => {
+    if (lenisApi?.lenis) {
+      lenisApi.lenis.start()
+      lenisApi.lenis.scrollTo(target, { offset, lock: false })
+      ScrollTrigger.update()
+    } else {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   })
-
-  gsap.fromTo(
-    '.experience',
-    { opacity: 0 },
-    { opacity: 1, duration: 1.4, ease: 'power2.out' },
-  )
-}
-
-const jump = (id) => {
-  const target = document.getElementById(`chapter-${id}`)
-  if (!target || !lenisApi) return
-  noteOpen.value = false
-  lenisApi.lenis.scrollTo(target, { offset: 0 })
 }
 
 const onKeydown = (event) => {
-  if (event.key === 'Escape') noteOpen.value = false
+  if (event.key === 'Escape') menuOpen.value = false
 }
 
-watch(noteOpen, (open) => {
+watch(menuOpen, (open) => {
   if (!lenisApi) return
   if (open) lenisApi.lenis.stop()
   else lenisApi.lenis.start()
 })
 
 onMounted(() => {
-  document.body.classList.add('is-locked')
+  document.body.classList.remove('is-locked')
   window.addEventListener('keydown', onKeydown)
-  const started = performance.now()
-  const duration = 2400
-
-  const tick = (now) => {
-    const t = Math.min(1, (now - started) / duration)
-    loadProgress.value = Math.round(easeOutCubic(t) * 100)
-    if (t < 1) loadFrame = requestAnimationFrame(tick)
-  }
-
-  loadFrame = requestAnimationFrame(tick)
+  lenisApi = createLenis()
 })
 
 onUnmounted(() => {
-  cancelAnimationFrame(loadFrame)
   window.removeEventListener('keydown', onKeydown)
-  unbindStory?.()
   lenisApi?.destroy()
-  document.body.classList.remove('is-locked')
 })
 </script>
 
 <template>
-  <div class="app" :class="{ 'is-entered': entered, 'is-note': noteOpen }">
-    <CursorDot />
-    <SceneCanvas @ready="onSceneReady" />
-
-    <Loader
-      v-if="!entered"
-      :progress="loadProgress"
-      :ready="sceneReady && loadProgress >= 100"
-      @enter="enter"
-    />
-
-    <TheNote :open="noteOpen" @close="noteOpen = false" />
-
-    <template v-if="entered">
-      <ExperienceHud :chapter="chapter" :total="6" @open-note="noteOpen = true" @jump="jump" />
-      <InsightPlayer :chapter="chapter" />
-    </template>
-
-    <main class="experience" :class="{ 'is-locked': !entered }">
-      <HeroSection />
-      <Chapter01 />
-      <Chapter02 />
-      <Chapter03 />
-      <Chapter04 />
-      <Chapter05 />
-      <Chapter06 />
-      <Chapter07 />
-      <FooterSection />
+  <div class="app">
+    <div v-if="menuOpen" class="menu" role="dialog" :aria-label="t('nav.menu')">
+      <button class="close" type="button" @click="menuOpen = false">{{ t('nav.close') }}</button>
+      <button v-for="item in t('nav.items')" :key="item.id" type="button" @click="jump(item.id)">
+        {{ item.label }}
+      </button>
+    </div>
+    <header class="top-bar bleed">
+      <div class="shell">
+        <SiteHeader :open="menuOpen" @jump="jump" @toggle="menuOpen = !menuOpen" />
+      </div>
+    </header>
+    <main>
+      <HeroShowcase @talk="jump('contact')" @book="jump('contact')" />
+      <WorksBlock />
+      <ContactBand />
     </main>
+    <SiteFooter />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  align-content: center;
+  gap: rem(14);
+  padding: max(8vh, env(safe-area-inset-top, 0px)) max(8vw, env(safe-area-inset-right, 0px))
+    max(8vh, env(safe-area-inset-bottom, 0px)) max(8vw, env(safe-area-inset-left, 0px));
+  background: var(--night);
+}
+
+.menu button {
+  justify-self: start;
+  color: var(--cream);
+  font-family: var(--font-poster);
+  font-size: clamp(#{rem(38)}, 6vw, #{rem(70)});
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.close {
+  font-family: var(--font-body) !important;
+  font-size: rem(14) !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: rem(16);
+}
+</style>

@@ -1,0 +1,40 @@
+@use 'sass:math';
+@use 'sass:meta';
+
+/// Root font-size in px (1rem = 16px).
+$rem-base: 16 !default;
+
+/// Even, whole px only (for `rem()` / spacing scale).
+@function even-px($px) {
+  @if meta.type-of($px) != 'number' {
+    @error 'even-px() expects a number, got #{meta.type-of($px)}.';
+  }
+
+  @if not math.is-unitless($px) {
+    @error 'Use unitless px in rem(), e.g. rem(12). Got #{$px}.';
+  }
+
+  $px-value: $px;
+
+  @if math.abs($px-value - math.round($px-value)) > 0.0001 {
+    @error 'Spacing must use whole px, not decimals (got #{$px}). Example: rem(12).';
+  }
+
+  $px-int: math.round($px-value);
+
+  @if $px-int % 2 != 0 {
+    @error 'Spacing must use even px (got #{$px-int}). Example: rem(12), not rem(11).';
+  }
+
+  @return $px-int;
+}
+
+/// Fluid clamp middle terms: **even integer** only (e.g. `10vw`, `8cqi`, `24vh` — not `10.5vw` or `11vh`).
+/// Applies to all breakpoints including mobile.
+
+/// Pixel → rem. Argument must be an **even integer** px (e.g. `rem(12)` → `0.75rem`).
+@function rem($px, $base: $rem-base) {
+  $px-even: even-px($px);
+
+  @return math.div($px-even, $base) * 1rem;
+}

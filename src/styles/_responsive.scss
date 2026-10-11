@@ -1,0 +1,49 @@
+@use 'mixins' as *;
+
+.works-inner,
+.contact-inner {
+  padding-block: rem(48);
+
+  @include tablet {
+    padding-block: rem(64);
+  }
+
+  @include desktop {
+    padding-block: rem(80);
+  }
+}
+
+#works .head {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: rem(16);
+
+  @include desktop {
+    flex-direction: row;
+    align-items: end;
+    gap: rem(32);
+  }
+}
+
+#works ul {
+  grid-template-columns: 1fr;
+
+  @include tablet-up {
+    grid-template-columns: 1fr 1fr;
+    column-gap: rem(32);
+  }
+}
+
+#contact .grid {
+  grid-template-columns: 1fr;
+  gap: rem(32);
+
+  @include tablet-up {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: rem(48);
+  }
+
+  @include desktop {
+    gap: rem(64);
+  }
+}

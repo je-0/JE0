@@ -4,6 +4,13 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [vue()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/styles/mixins" as *;\n`,
+      },
+    },
+  },
   base: process.env.VITE_PAGES === '1' ? '/JE0/' : '/',
   resolve: {
     alias: {
